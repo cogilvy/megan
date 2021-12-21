@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+<section>
+<a href="/">Return to Periods overview</a>
+<h1>Detail View</h1>
+  <div>Phase: <%= period.phase %></div>
+  <div>Date: <%= period.periodDate %></div>
+
+</section>
+<% if (!period.notes.length) { %>
+<section id="notes">
+  <form id="note-form" action="/periods/<%= period._id %>/notes" method="POST">
+    <div>day notes:</div>
+    <label>cramps:</label>
+    <input type="radio" name="cramps" value="0">0 
+    <input type="radio" name="cramps" value="1">1 
+    <input type="radio" name="cramps" value="2">2 
+    <input type="radio" name="cramps" value="3">3  
+    <input type="radio" name="cramps" value="4">4 
+    <input type="radio" name="cramps" value="5">5 <br>
+    
+    no energy<input type="range" min="0" max="5" name="energy">high energy
+    <div>mood</div>
+    <input type="checkbox" name="mood" value="Anxious">Anxious
+    <input type="checkbox" name="mood" value="Nervous">Nervous
+    <input type="checkbox" name="mood" value="Tense">Tense
+    <input type="checkbox" name="mood" value="Depressed">Depressed
+    <input type="checkbox" name="mood" value="Sad">Sad
+    <input type="checkbox" name="mood" value="Lost">Lost
+    <input type="checkbox" name="mood" value="Iritated">Iritated
+    <input type="checkbox" name="mood" value="Happy">Happy
+    <input type="checkbox" name="mood" value="Elated">Elated
+    <input type="checkbox" name="mood" value="I feel nothing.">I feel nothing. <br>
+    <input type="submit" value="Save Notes">
+  </form>
+<% } else { %>
+  <div>Notes for today:</div>
+  <% period.notes.forEach(function(n) { %>
+    <div>cramps: <%= n.cramps %></div>
+    <div>energy: <%= n.energy %></div>
+    <div>mood: <%= n.mood %></div>
+
+  <% }) %>
+<% } %>
+</section>
+
+
+<%- include('../partials/footer') %>
